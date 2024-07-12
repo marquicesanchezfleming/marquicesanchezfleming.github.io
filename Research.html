@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Research</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.1em;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            text-align: justify;
+        }
+        ol {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0;
+            list-style: none;
+        }
+        ol li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        ol li:not(:last-child) {
+            margin-bottom: 20px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .image {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .image img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Project Overview</h1>
+    <p>
+        My work involved the cross-matching of radio data from the Very Large Array Sky Survey (VLASS) with optical data from
+        the Bright Transient Survey (BTS) headed by the Zwicky Transient Facility (ZTF). The cross-matching is done via the
+        usage of numerous Python scripts, which do the following, in that general order.
+    </p>
+    <ol>
+        <li>Using a 'get_cutout' function, once the script is provided with right ascension and declination coordinates,
+            it will then search the VLASS catalog for a source at those coordinates across all the epochs. If a radio
+            If there is a corresponding tile, it will download that tile and all future iterations of itself, granted they
+            exist.
+        </li>
+        <li>
+            After downloading the VLASS tiles, it then begins to download cutouts from both the Legacy Survey and PanStaRRS
+            sky surveys, with the 'plot_ls_cutout' and 'plot_ps_cutout' functions, respectively.
+        </li>
+        <li>
+            Using two more functions, 'process_object' and 'process_csv', I am able to run the previously named functions
+            across an entire csv, such as <a href="/bts_data.CSV" target="_blank">this one</a>, automating the process of
+            downloading the cutouts for the 8,888 objects.
+        </li>
+        <li>
+            After all the images are downloaded and saved to an 'Images' folder, I have another script that generates an
+            html webpage that displays the transients, their TNS ID, right ascension and declination, and the cutouts in a
+            single row. Furthermore, underneath each VLASS cutout, I have the difference in days from the initial observation
+            by ZTF. For example, if it says 'Difference in Days: 163.4210000000021', then that implies that particular epoch
+            observed that transient 163.421 days after ZTF observed the object, and naturally, if it says 'Difference in
+            Days: -947.6589999999997', then that epoch was imaged 947.658 days before ZTF observed the object. An example
+            of a few rows from the html page are pasted below.
+            <div class="image">
+                <img src="/Images/Screenshot 2024-07-11 at 10.51.27 AM.png" alt="Marquice Sanchez-Fleming">
+            </div>
+        </li>
+        <li>
+            At this point, I developed a script that calculated the statistical significances of the increase in the Peak
+            Flux and RMS across the epochs, which I then used to exclude transients who had a statistical significance of
+            less than 4, providing me with a list of transients who had clear, and statistically significant radio
+            detection.
+        </li>
+        <li>
+            Now that I had a list of transients I was confident with, I submitted a proposal to the Very Large Array for
+            additional observing.
+        </li>
+        <li>
+            All scripts associated with this project are available for public use on my GitHub, found in <a
+                href="https://github.com/marquicesanchezfleming/VLASS-ZTF-Crossmatch">this</a> repository.
+        </li>
+    </ol>
+</body>
+</html>
+
